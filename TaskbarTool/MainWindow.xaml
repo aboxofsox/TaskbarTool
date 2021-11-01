@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TaskbarTool"
+        xmlns:local="clr-namespace:TaskbarTool" 
         mc:Ignorable="d"
-        Title="Taskbar Tool" Height="200" Width="400">
+        Title="Taskbar Tool" Height="250" Width="400" MaxWidth="400" MaxHeight="250" MinWidth="400" MinHeight="250">
     <Grid>
-        <TextBlock Text="Taskbar Tool" Margin="0,31,0,0" FontWeight="Bold" FontSize="18" Width="114" Height="27" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="Taskbar Tool" Margin="0,41,0,0" FontWeight="Bold" FontSize="18" Width="114" Height="26" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <ComboBox Height="20" Margin="0,72,0,0" x:Name="PositionBox" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Button Height="30" Content="Set" Margin="0,117,0,0" x:Name="SetTaskBar" Click="SetTaskBar_Click" Width="88" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button Height="30" Content="Set" Margin="227,139,0,0" x:Name="SetTaskBar" Click="SetTaskBar_Click" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Height="30" Content="Backup" Margin="88,139,0,0" x:Name="BackupReg" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackupReg_Click" RenderTransformOrigin="0.364,0.451"/>
 
-        <TextBlock Width="120" Height="20" Margin="656,8,24,406" x:Name="TestKey"/>
+        <Label Content="Set All Displays:" HorizontalAlignment="Left" Margin="130,97,0,0" VerticalAlignment="Top" Width="92" Height="25"/>
+        <CheckBox Margin="255,104,0,0" x:Name="SetAllDisplays" Width="15" Height="15" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Window>

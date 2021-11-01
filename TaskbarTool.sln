@@ -9,6 +9,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
+		Deployment|Any CPU = Deployment|Any CPU
+		Deployment|x64 = Deployment|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Test|Any CPU = Test|Any CPU
@@ -19,6 +21,10 @@ Global
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Debug|x64.ActiveCfg = Debug|x64
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Debug|x64.Build.0 = Debug|x64
+		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|Any CPU.ActiveCfg = Deployment|Any CPU
+		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|Any CPU.Build.0 = Deployment|Any CPU
+		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|x64.ActiveCfg = Deployment|x64
+		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|x64.Build.0 = Deployment|x64
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Release|x64.ActiveCfg = Release|x64

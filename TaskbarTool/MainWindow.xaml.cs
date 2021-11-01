@@ -38,6 +38,17 @@ namespace TaskbarTool
         {
             string Pos = "";
 
+            bool setAll = false;
+
+            if (SetAllDisplays.IsChecked == true)
+            {
+                setAll = true;
+            }
+            else
+            {
+                setAll = false;
+            }
+
             switch (PositionBox.Text.ToLower())
             {
                 case "top":
@@ -57,9 +68,13 @@ namespace TaskbarTool
                     break;
             }
 
-            string message = "Moved taskbar to " + Pos;
+            RegKeyHandler.SetKeys(Pos, true, setAll);
+        }
 
-            RegKeyHandler.SetKeys(Pos, true);
+        private void BackupReg_Click(object sender, RoutedEventArgs e)
+        {
+            RegKeyHandler.CreateBackup();
+            MessageBox.Show("Registry keys were copied to your desktop.", "Backup Complete");
         }
     }
 }

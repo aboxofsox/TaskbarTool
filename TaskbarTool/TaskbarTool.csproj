@@ -6,8 +6,15 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon />
     <StartupObject />
-    <Configurations>Debug;Release;Test</Configurations>
+    <Configurations>Debug;Release;Test;Deployment</Configurations>
     <Platforms>AnyCPU;x64</Platforms>
+    <SignAssembly>false</SignAssembly>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AssemblyOriginatorKeyFile>TaskbarTool.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutputPath>C:\Dev\Releases\TaskbarTool\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
