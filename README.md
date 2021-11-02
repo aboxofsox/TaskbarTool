@@ -15,4 +15,5 @@ Go to the releases section and download the zip folder containing the binaries t
 - [ ] Realign taskbar icons when aligned to the left or right
 - [ ] Remember open folders so when `explorer.exe` is reset, you don't lose out on anything
 - [ ] Fix system tray when aligned to the left or right
+- [x] Ability to change taskbar height.
 
