@@ -92,13 +92,13 @@ namespace TaskbarTool
                     Size = 1;
                     break;
             }
-            RegKeyHandler.SetKeys(Pos, true, setAll);
-            RegKeyHandler.SetTaskbarSize(Size);
+            Taskbar.SetPosition(Pos, true, setAll);
+            Taskbar.SetSize(Size);
         }
 
         private void BackupReg_Click(object sender, RoutedEventArgs e)
         {
-            RegKeyHandler.CreateBackup();
+            Taskbar.CreateBackup();
             MessageBox.Show("Registry keys were copied to your desktop.", "Backup Complete");
         }
     }

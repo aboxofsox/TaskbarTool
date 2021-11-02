@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon />
+    <ApplicationIcon>Win11Icon2.ico</ApplicationIcon>
     <StartupObject />
     <Configurations>Debug;Release;Test;Deployment</Configurations>
     <Platforms>AnyCPU;x64</Platforms>

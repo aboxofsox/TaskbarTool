@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace TaskbarTool
 {
     // Needs refactoring
-    public class MultiDisplays
+    public class TaskbarMultiDisplay
     {
         public static void Set(byte[] bytes)
         {
@@ -29,11 +29,9 @@ namespace TaskbarTool
         }
     }
     
-
-
-    public class RegKeyHandler
+    public class Taskbar
     { 
-        public static void SetKeys(string pos, bool restartExplorer, bool setAll)
+        public static void SetPosition(string pos, bool restartExplorer, bool setAll)
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3");
 
@@ -65,14 +63,14 @@ namespace TaskbarTool
 
                 if (setAll == true)
                 {
-                    MultiDisplays.Set(newHex);
+                    TaskbarMultiDisplay.Set(newHex);
                 }
             }
 
             
         }
 
-        public static void SetTaskbarSize(int size)
+        public static void SetSize(int size)
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced");
 
