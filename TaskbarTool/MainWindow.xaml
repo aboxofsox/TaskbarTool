@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:TaskbarTool" 
         mc:Ignorable="d"
         Title="Taskbar Tool" Height="250" Width="400" MaxWidth="400" MaxHeight="250" MinWidth="400" MinHeight="250">
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
     <Grid>
         <TextBlock Text="Taskbar Tool" Margin="0,41,0,0" FontWeight="Bold" FontSize="18" Width="114" Height="26" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <ComboBox Height="20" Margin="0,72,0,0" x:Name="PositionBox" Width="140" HorizontalAlignment="Center" VerticalAlignment="Top" />
-        <Button Height="30" Content="Set" Margin="227,139,0,0" x:Name="SetTaskBar" Click="SetTaskBar_Click" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button Height="30" Content="Backup" Margin="88,139,0,0" x:Name="BackupReg" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackupReg_Click" RenderTransformOrigin="0.364,0.451"/>
+        <Button Height="30" Content="Set" Margin="226,170,0,0" x:Name="SetTaskBar" Click="SetTaskBar_Click" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Height="30" Content="Backup" Margin="88,170,0,0" x:Name="BackupReg" Width="88" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackupReg_Click" RenderTransformOrigin="0.364,0.451"/>
 
-        <Label Content="Set All Displays:" HorizontalAlignment="Left" Margin="130,97,0,0" VerticalAlignment="Top" Width="92" Height="25"/>
-        <CheckBox Margin="255,104,0,0" x:Name="SetAllDisplays" Width="15" Height="15" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Set All Displays:" HorizontalAlignment="Left" Margin="130,131,0,0" VerticalAlignment="Top" Width="92" Height="25"/>
+        <CheckBox Margin="255,136,0,0" x:Name="SetAllDisplays" Width="15" Height="15" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox x:Name="TaskbarSizeBox" HorizontalAlignment="Center" Margin="0,101,0,0" VerticalAlignment="Top" Width="140" Height="20"/>
     </Grid>
 </Window>

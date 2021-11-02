@@ -33,9 +33,10 @@ namespace TaskbarTool
             }
 
 
-            
+
         }
     }
+    
 
 
     public class RegKeyHandler
@@ -84,6 +85,16 @@ namespace TaskbarTool
 
             
         }
+
+        public static void SetTaskbarSize(int size)
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced");
+
+            string newKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced";
+            Registry.SetValue(newKey, "TaskbarSi", size);
+        }
+
+          
         public static void CreateBackup()
         {
             string single = "StuckRects3";

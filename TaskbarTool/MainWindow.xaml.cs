@@ -32,11 +32,19 @@ namespace TaskbarTool
             PositionBox.Items.Add("Right");
             PositionBox.Items.Add("Bottom");
 
+            TaskbarSizeBox.Items.Add("-- Taskbar Size --");
+            TaskbarSizeBox.SelectedIndex = 0;
+
+            TaskbarSizeBox.Items.Add("Small");
+            TaskbarSizeBox.Items.Add("Default");
+            TaskbarSizeBox.Items.Add("Large");
+
         }
 
         private void SetTaskBar_Click(object sender, RoutedEventArgs e)
         {
             string Pos = "";
+            int Size = 1;
 
             bool setAll = false;
 
@@ -68,7 +76,24 @@ namespace TaskbarTool
                     break;
             }
 
+
+            switch (TaskbarSizeBox.Text.ToLower())
+            {
+                case "small":
+                    Size = 0;
+                    break;
+                case "default":
+                    Size = 1;
+                    break;
+                case "large":
+                    Size = 2;
+                    break;
+                default:
+                    Size = 1;
+                    break;
+            }
             RegKeyHandler.SetKeys(Pos, true, setAll);
+            RegKeyHandler.SetTaskbarSize(Size);
         }
 
         private void BackupReg_Click(object sender, RoutedEventArgs e)

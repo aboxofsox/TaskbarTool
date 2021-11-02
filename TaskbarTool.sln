@@ -23,8 +23,8 @@ Global
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Debug|x64.Build.0 = Debug|x64
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|Any CPU.ActiveCfg = Deployment|Any CPU
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|Any CPU.Build.0 = Deployment|Any CPU
-		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|x64.ActiveCfg = Deployment|x64
-		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|x64.Build.0 = Deployment|x64
+		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|x64.ActiveCfg = Release|x64
+		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Deployment|x64.Build.0 = Release|x64
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF5C3CC9-FC8B-4447-971C-B95E264BC97E}.Release|x64.ActiveCfg = Release|x64
