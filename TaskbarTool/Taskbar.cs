@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using Microsoft.Win32;
 using System.Diagnostics;
 
@@ -6,12 +7,22 @@ using System.Diagnostics;
 namespace TaskbarTool
 {
     // Needs refactoring
+
+    public class KeyData
+    {
+        public static string Path = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3";
+        public static string ShortPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3";
+        public static string MMPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
+        public static string MMShortPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
+        public static string AdvancedPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced";
+        public static string Destination = "C:\\Users\\" + Environment.UserName + "\\Desktop";
+    }
+
     public class TaskbarMultiDisplay
     {
         public static void Set(byte[] bytes)
         {
-            string path = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3");
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(KeyData.MMShortPath);
 
             if (key != null)
             {
@@ -19,7 +30,7 @@ namespace TaskbarTool
 
                 foreach (string name in valueNames)
                 {
-                    Registry.SetValue(path, name, bytes);
+                    Registry.SetValue(KeyData.MMPath, name, bytes);
                 }
             }
             else
@@ -33,16 +44,13 @@ namespace TaskbarTool
     { 
         public static void SetPosition(string pos, bool restartExplorer, bool setAll)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3");
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(KeyData.ShortPath);
 
-            // Needs refactoring
             if (key != null)
             {
-                byte[] data = (byte[])key.GetValue("Settings");
-                string originalHex = BitConverter.ToString(data);
-                string[] originalHexArray = originalHex.Split("-");
+                byte[] keyValue = (byte[])key.GetValue("Settings");
+                string[] value = BitConverter.ToString(keyValue).Split("-");
 
-                string[] value = "30,00,00,00,fe,ff,ff,ff,7a,f4,00,00,03,00,00,00,30,00,00,00,30,00,00,00,00,00,00,00,00,00,00,00,00,0a,00,00,30,00,00,00,60,00,00,00,01,00,00,00".Split(",");
                 byte[] newHex = new byte[value.Length];
 
                 value[12] = pos;
@@ -52,7 +60,7 @@ namespace TaskbarTool
                     newHex[i] = Convert.ToByte(value[i], 16);
                 }
 
-                Registry.SetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3", "Settings", newHex);
+                Registry.SetValue(KeyData.Path, "Settings", newHex);
 
                 var explorer = Process.GetProcessesByName("explorer")[0];
 
@@ -67,25 +75,16 @@ namespace TaskbarTool
                 }
             }
 
-            
         }
 
         public static void SetSize(int size)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced");
-
-            string newKey = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced";
-            Registry.SetValue(newKey, "TaskbarSi", size);
+            Registry.SetValue(KeyData.AdvancedPath, "TaskbarSi", size);
         }
 
           
         public static void CreateBackup()
         {
-            string single = "StuckRects3";
-            string multi = "MMStuckRects3";
-            string singleDisplayPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\" + single;
-            string multiDisplayPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\" + multi;
-            string destinationPath = "C:\\Users\\" + Environment.UserName + "\\Desktop";
 
             using (Process process = new Process())
             {
@@ -97,7 +96,7 @@ namespace TaskbarTool
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.RedirectStandardOutput = true;
                     process.StartInfo.RedirectStandardError = true;
-                    process.StartInfo.Arguments = "export \"" + singleDisplayPath + "\" \"" + destinationPath + "\\StuckRects3.reg" + "\" /y";
+                    process.StartInfo.Arguments = "export \"" + KeyData.Path + "\" \"" + KeyData.Destination + "\\StuckRects3.reg" + "\" /y";
                     process.Start();
                     string stdout = process.StandardOutput.ReadToEnd();
                     string stderr = process.StandardError.ReadToEnd();
@@ -119,7 +118,7 @@ namespace TaskbarTool
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.RedirectStandardOutput = true;
                     process.StartInfo.RedirectStandardError = true;
-                    process.StartInfo.Arguments = "export \"" + multiDisplayPath + "\" \"" + destinationPath + "\\MMStuckRects3.reg" + "\" /y";
+                    process.StartInfo.Arguments = "export \"" + KeyData.MMPath + "\" \"" + KeyData.Destination + "\\MMStuckRects3.reg" + "\" /y";
                     process.Start();
                     string stdout = process.StandardOutput.ReadToEnd();
                     string stderr = process.StandardError.ReadToEnd();
@@ -127,7 +126,8 @@ namespace TaskbarTool
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Unable to make a copy of the registry keys");
+                    Trace.WriteLine(e);
+                    Application.Current.Shutdown();
                 }
             }
 
