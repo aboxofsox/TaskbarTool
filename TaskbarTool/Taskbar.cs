@@ -1,21 +1,21 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
+using System.Web;
 
 
 namespace TaskbarTool
 {
-    // Needs refactoring
-
     public class KeyData
     {
-        public static string Path = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3";
-        public static string ShortPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3";
-        public static string MMPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
-        public static string MMShortPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
-        public static string AdvancedPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced";
-        public static string Destination = "C:\\Users\\" + Environment.UserName + "\\Desktop";
+        public static readonly string Path = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3";
+        public static readonly string ShortPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StuckRects3";
+        public static readonly string MMPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
+        public static readonly string MMShortPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MMStuckRects3";
+        public static readonly string AdvancedPath = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced";
+        public static readonly string ShellPackagePath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell\\Update\\Packages";
+        public static readonly string ShellPackageShortPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell\\Update\\Packages";
+        public static readonly string Destination = "C:\\Users\\" + Environment.UserName + "\\Desktop";
     }
 
     public class TaskbarMultiDisplay
@@ -39,9 +39,9 @@ namespace TaskbarTool
             }
         }
     }
-    
+
     public class Taskbar
-    { 
+    {
         public static void SetPosition(string pos, bool restartExplorer, bool setAll)
         {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(KeyData.ShortPath);
@@ -82,11 +82,61 @@ namespace TaskbarTool
             Registry.SetValue(KeyData.AdvancedPath, "TaskbarSi", size);
         }
 
-          
+        public static void Unlock(bool option)
+        {
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(KeyData.ShellPackageShortPath);
+            Registry.SetValue(KeyData.ShellPackagePath, "UndockingDisabled", 0);
+            
+            switch (option)
+            {
+                case true:
+                    Registry.SetValue(KeyData.ShellPackagePath, "UndockingDisabled", 1);
+                    Taskbar.RunShell();
+                    break;
+                case false:
+                    Registry.SetValue(KeyData.ShellPackagePath, "UndockingDisabled", 0);
+                    break;
+            }
+            
+        }
+
+        public static void RunShell()
+        {
+            string cmdArgs = "shell:::{05d7b0f4-2121-4eff-bf6b-ed3f69b894d9}";
+            using (Process cmd = new())
+            {
+                try
+                {
+                    cmd.StartInfo.FileName = "cmd.exe";
+                    cmd.StartInfo.CreateNoWindow = true;
+                    cmd.StartInfo.UseShellExecute = false;
+                    cmd.StartInfo.RedirectStandardOutput = true;
+                    cmd.StartInfo.RedirectStandardError = true;
+                    cmd.StartInfo.Arguments = "/C start shell:::{05d7b0f4-2121-4eff-bf6b-ed3f69b894d9}";
+                    cmd.Start();
+
+                    string stdout = cmd.StandardOutput.ReadToEnd();
+                    string stderr = cmd.StandardError.ReadToEnd();
+
+                    cmd.WaitForExit();
+
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Unable to start shell.", e);
+                }
+                finally
+                {
+                    Trace.WriteLine("Shell has started");
+                }
+            }
+        }
+
         public static void CreateBackup()
         {
 
-            using (Process process = new Process())
+            using (Process process = new())
             {
                 try
                 {
@@ -104,11 +154,11 @@ namespace TaskbarTool
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Unable to make a copy of the registry keys.");
+                    throw new Exception("Unable to make a copy of the registry keys.", e);
                 }
             }
 
-            using (Process process = new Process())
+            using (Process process = new())
             {
                 try
                 {
@@ -126,8 +176,7 @@ namespace TaskbarTool
                 }
                 catch (Exception e)
                 {
-                    Trace.WriteLine(e);
-                    Application.Current.Shutdown();
+                    throw new Exception("Unable to make a copy of the registry keys.", e);
                 }
             }
 

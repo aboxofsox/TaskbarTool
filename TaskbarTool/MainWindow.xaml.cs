@@ -45,6 +45,7 @@ namespace TaskbarTool
         {
             string Pos = "";
             int Size = 1;
+            bool unlock = false;
 
             bool setAll = false;
 
@@ -92,8 +93,18 @@ namespace TaskbarTool
                     Size = 1;
                     break;
             }
+
+            if (UnlockTaskbar.IsChecked == true)
+            {
+                unlock = true;
+            } 
+            else
+            {
+                unlock = false;
+            }
             Taskbar.SetPosition(Pos, true, setAll);
             Taskbar.SetSize(Size);
+            Taskbar.Unlock(unlock);
         }
 
         private void BackupReg_Click(object sender, RoutedEventArgs e)
@@ -101,5 +112,16 @@ namespace TaskbarTool
             Taskbar.CreateBackup();
             MessageBox.Show("Registry keys were copied to your desktop.", "Backup Complete");
         }
+
+        public void OpenControlSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Taskbar.RunShell();
+        }
+
+        public void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
