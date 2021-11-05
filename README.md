@@ -12,4 +12,6 @@ Go to the releases section and download the zip folder containing the binaries t
 - [ ] Remember open folders so when `explorer.exe` is reset, you don't lose out on anything
 - [x] Fix system tray when aligned to the left or right
 - [x] Ability to change taskbar height.
+- [ ] Add reset button
+- [ ] Fix Windows Start button when taskbar is aligned to the left or right
 
