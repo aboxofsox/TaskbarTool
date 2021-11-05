@@ -7,10 +7,6 @@ Go to the releases section and download the zip folder containing the binaries t
 ### Prerequisites
 - Requires .NET 5
 
-### Known-Issues
-- Left and right align do not realign the taskbar icons.
-- When resetting `explorer.exe` to apply the changes, folders that were open in the file explorer will be closed.
-
 ### Soon™️
 - [x] Realign taskbar icons when aligned to the left or right
 - [ ] Remember open folders so when `explorer.exe` is reset, you don't lose out on anything
