@@ -7,13 +7,11 @@ Go to the releases section and download the zip folder containing the binaries t
 ### Prerequisites
 - Requires .NET 5
 
-### Known-Issues
-- Left and right align do not realign the taskbar icons.
-- When resetting `explorer.exe` to apply the changes, folders that were open in the file explorer will be closed.
-
 ### Soon™️
-- [ ] Realign taskbar icons when aligned to the left or right
+- [x] Realign taskbar icons when aligned to the left or right
 - [ ] Remember open folders so when `explorer.exe` is reset, you don't lose out on anything
-- [ ] Fix system tray when aligned to the left or right
+- [x] Fix system tray when aligned to the left or right
 - [x] Ability to change taskbar height.
+- [ ] Add reset button
+- [ ] Fix Windows Start button when taskbar is aligned to the left or right
 
